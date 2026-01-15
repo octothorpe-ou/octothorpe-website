@@ -1,3 +1,11 @@
+ ---
+  title: ""
+  ---
+
+  <p align="center">
+    <img src="../logo.svg" alt="Octothorpe" width="120" />
+  </p>
+
 # Privacy Policy for Memoryveil
 
 **Effective Date:** January 15, 2026
