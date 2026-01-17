@@ -125,7 +125,7 @@ For full details, see our [Privacy Policy](PRIVACY_POLICY.md).
 
 Having issues or questions?
 
-- **Email:** info@octothorpe.ee
+- **Email:** support@octothorpe.ee
 - **Website:** https://octothorpe.ee
 
 We typically respond within 1-2 business days.
