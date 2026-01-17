@@ -14,8 +14,8 @@ We are committed to protecting your privacy and being transparent about our data
 **Company Information:**
 - **Company Name:** Octothorpe OÜ
 - **Location:** Estonia, European Union
-- **Contact Email:** [INSERT YOUR EMAIL]
-- **Website:** [INSERT YOUR WEBSITE]
+- **Contact Email:** info@octothorpe.ee
+- **Website:** https://octothrope.ee
 
 ---
 
