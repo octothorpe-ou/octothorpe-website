@@ -148,8 +148,8 @@ We encourage you to review this Privacy Policy periodically to stay informed abo
 If you have any questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us:
 
 **Octothorpe OÜ**  
-Email: [INSERT YOUR EMAIL]  
-Website: [INSERT YOUR WEBSITE]  
+Email: info@octothorpe.ee  
+Website: https://octothorpe.ee  
 
 We aim to respond to all inquiries within 30 days.
 
