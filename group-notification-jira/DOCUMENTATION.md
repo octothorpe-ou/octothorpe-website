@@ -8,7 +8,7 @@ Group Notification for Jira enables you to @mention all members of a group at on
 
 ## Installation
 
-1. Go to the [Atlassian Marketplace listing](https://marketplace.atlassian.com/apps/group-notification-jira)
+1. Go to the [Atlassian Marketplace listing](https://marketplace.atlassian.com/apps/XXXXX)
 2. Click **Get it now** or **Try it free**
 3. Select the Jira Cloud instance where you want to install the app
 4. Confirm the installation and approve the required permissions
