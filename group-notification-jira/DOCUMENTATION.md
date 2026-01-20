@@ -2,7 +2,7 @@
 
 ## Overview
 
-Group Notification for Jira enables you to @mention all members of a group at once in Jira issues. Instead of typing each name manually, select a group and create a comment that notifies everyone.
+Group Notification for Jira enables you to @mention all members of one or more groups at once in Jira issues. Instead of typing each name manually, select groups and create a comment that notifies everyone.
 
 ---
 
@@ -25,8 +25,9 @@ The app requests the following permissions:
 |------------|-----------------|
 | `read:jira-work` | To access issue context for creating comments |
 | `write:jira-work` | To create comments with @mentions on issues |
-| `read:group:jira` | To display available groups and fetch member lists |
-| `manage:jira-configuration` | To access group management APIs |
+| `read:group:jira` | To display available groups |
+| `manage:jira-configuration` | To fetch group member lists |
+| `storage:app` | To remember your preferences (recent groups, filters) |
 
 ---
 
@@ -40,16 +41,22 @@ The app requests the following permissions:
 
 ### Creating a Group Notification
 
-1. **Select a group** from the dropdown menu
-   - The app shows the member count after selection
+1. **Filter groups** (optional) — Type in the filter field to narrow down the list
+   - Your last filter is remembered between sessions
+2. **Select groups** from the multi-select dropdown
+   - Select one or multiple groups at once
+   - Recently used groups appear first for quick access
+   - The app shows the total member count after selection
    - Groups with no active members will show a warning
-2. **Add a message** (optional) — Include additional context with the notification
-3. **Include group name** (optional) — Check this box to prefix the comment with the group name
-4. Click **Notify X members** to create the comment
+3. **Add a message** (optional) — Use the rich text editor to include additional context
+   - Supports markdown shortcuts: `**bold**`, `*italic*`, `` `code` ``, `- list`
+4. **Include group name** (optional) — Check this box to prefix the comment with the group name(s)
+5. Click **Notify X members** to create the comment
 
 ### After Sending
 
-- A comment is created on the issue mentioning all group members
+- A single comment is created mentioning all unique members from selected groups
+- Duplicate members across groups are automatically removed
 - Each member receives a notification based on their personal notification settings
 - The modal auto-closes after successful notification
 
@@ -57,17 +64,30 @@ The app requests the following permissions:
 
 ## Features
 
-### Optional Message
-Add custom text to accompany the @mentions. The message appears before the member mentions in the comment.
+### Multi-Group Selection
+Select multiple groups at once to notify all their members in a single comment. Members appearing in multiple groups are automatically deduplicated.
+
+### Group Filtering
+Use the filter field to quickly find groups by name. Your filter is remembered between sessions for convenience.
+
+### Recent Groups
+Groups you've recently notified appear at the top of the list, making it faster to notify the same groups again.
+
+### Rich Text Messages
+The message editor supports rich text formatting with markdown shortcuts:
+- `**bold**` for **bold text**
+- `*italic*` for *italic text*
+- `` `code` `` for `inline code`
+- `- item` for bullet lists
 
 ### Group Name Label
-Enable "Include group name in comment" to prefix the comment with the group name, making it clear which group was notified.
+Enable "Include group name in comment" to prefix the comment with the group name(s), making it clear which groups were notified.
 
 ### Member Count Preview
-After selecting a group, the button shows the exact number of members that will be notified.
+After selecting groups, the button shows the exact number of unique members that will be notified. When multiple groups are selected, it shows "up to X members" to indicate deduplication.
 
 ### Large Group Handling
-Groups with more than 1,000 members are truncated. The app displays a warning and mentions only the first 1,000 members.
+Groups with more than 1,000 members are truncated. The app displays a warning and mentions only the first 1,000 members per group.
 
 ---
 
@@ -83,7 +103,7 @@ No, Group Notification is built on Atlassian Forge and only supports Cloud produ
 
 ### Can I notify multiple groups at once?
 
-Currently, you can select one group at a time. Run the action multiple times for multiple groups.
+Yes! You can select multiple groups from the dropdown. All members will be mentioned in a single comment, and duplicates across groups are automatically removed.
 
 ### What happens if a group has many members?
 
@@ -166,4 +186,5 @@ We typically respond within 1-2 business days.
 
 | Version | Date | Changes |
 |---------|------|---------|
+| 1.1.0 | January 2026 | Multi-group selection, rich text editor, group filtering, recent groups |
 | 1.0.0 | January 2026 | Initial release with optional messages and group labels |
