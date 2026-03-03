@@ -169,8 +169,9 @@
 
     <script>
         (function () {
-            var params = new URLSearchParams(window.location.search);
-            var raw = params.get("d");
+            var hash = window.location.hash.slice(1);
+            var query = new URLSearchParams(window.location.search).get("d");
+            var raw = hash || query;
 
             if (!raw) {
                 document.getElementById("error").hidden = false;
