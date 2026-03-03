@@ -169,35 +169,20 @@
 
     <script>
         (function () {
-            var hash = window.location.hash.slice(1);
-            var query = new URLSearchParams(window.location.search).get("d");
-            var raw = hash || query;
+            var params = new URLSearchParams(window.location.search);
+            var ts = params.get("t");
 
-            if (!raw) {
+            if (!ts) {
                 document.getElementById("error").hidden = false;
                 return;
             }
 
-            var base64 = raw.replace(/-/g, "+").replace(/_/g, "/");
-            while (base64.length % 4 !== 0) {
-                base64 += "=";
-            }
+            var unlockMs = parseInt(ts, 10) * 1000;
 
-            var payload;
-            try {
-                var json = atob(base64);
-                payload = JSON.parse(json);
-            } catch (e) {
+            if (isNaN(unlockMs)) {
                 document.getElementById("error").hidden = false;
                 return;
             }
-
-            if (typeof payload.unlockTimestamp !== "number") {
-                document.getElementById("error").hidden = false;
-                return;
-            }
-
-            var unlockMs = payload.unlockTimestamp * 1000;
             var card = document.getElementById("message");
             var icon = document.getElementById("icon");
             var status = document.getElementById("status");
