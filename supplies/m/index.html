@@ -5,11 +5,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Supplies - Sealed Message</title>
-    <meta name="description" content="You received a time-locked message. Install Supplies to read it.">
-    <meta property="og:title" content="Supplies - Sealed Message">
-    <meta property="og:description" content="You received a time-locked message. Install Supplies to read it.">
+    <title>Sealed Message — Supplies</title>
+    <meta name="description" content="Time-locked for your eyes only. Powered by Supplies.">
+    <meta property="og:title" content="Sealed Message from Supplies">
+    <meta property="og:description" content="Time-locked for your eyes only.">
     <meta property="og:type" content="website">
+    <meta property="og:image" content="https://octothorpe.ee/supplies/m/og-image.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -47,6 +48,17 @@
             font-size: 48px;
             margin-bottom: 1rem;
             line-height: 1;
+            transition: transform 0.3s ease;
+        }
+
+        .lock-icon.unlocking {
+            animation: lockRotate 0.3s ease forwards;
+        }
+
+        @keyframes lockRotate {
+            0% { transform: rotate(0deg); }
+            50% { transform: rotate(-15deg); }
+            100% { transform: rotate(0deg); }
         }
 
         .status {
@@ -75,14 +87,16 @@
             line-height: 1.4;
         }
 
-        .cta {
+        .open-btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 0.4rem;
-            background: #007aff;
+            background: #34c759;
             color: #fff;
-            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
             font-size: 1rem;
             font-weight: 600;
             padding: 0.85rem 1.75rem;
@@ -92,14 +106,31 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        .cta:active {
-            background: #0062cc;
+        .open-btn:active {
+            background: #2ba84a;
         }
 
-        .cta svg {
-            width: 20px;
-            height: 20px;
-            fill: currentColor;
+        .open-btn:disabled {
+            background: #86868b;
+            cursor: not-allowed;
+        }
+
+        .message-text {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #1d1d1f;
+            text-align: left;
+            white-space: pre-wrap;
+            word-break: break-word;
+            margin-top: 1rem;
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .message-text.revealed {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .error-card {
@@ -143,6 +174,16 @@
         footer a:hover {
             text-decoration: underline;
         }
+
+        .noscript-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            max-width: 360px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+        }
     </style>
 </head>
 <body>
@@ -151,84 +192,221 @@
         <div class="status" id="status"></div>
         <div class="countdown" id="countdown"></div>
         <div class="subtitle" id="subtitle"></div>
-        <a class="cta" id="cta" href="/supplies/get">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-            Get Supplies
-        </a>
+        <button class="open-btn" id="openBtn" hidden>Open Message</button>
+        <div class="message-text" id="messageText"></div>
     </div>
 
     <div id="error" class="error-card" hidden>
         <div class="error-icon">?</div>
-        <div class="error-title">Invalid message link</div>
-        <div class="error-body">This link doesn't contain a valid Supplies message. It may have been truncated or corrupted.</div>
+        <div class="error-title" id="errorTitle">Invalid message link</div>
+        <div class="error-body" id="errorBody">This link doesn't contain a valid Supplies message. It may have been truncated or corrupted.</div>
     </div>
 
+    <noscript>
+        <div class="noscript-card">
+            <div style="font-size: 48px; margin-bottom: 1rem;">&#x1F512;</div>
+            <div style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">JavaScript Required</div>
+            <div style="font-size: 0.9rem; color: #86868b; line-height: 1.5;">
+                This sealed message requires JavaScript to decrypt. Please enable JavaScript in your browser settings.
+            </div>
+        </div>
+    </noscript>
+
     <footer>
-        <a href="https://octothorpe.ee">Octothorpe OU</a>
+        <a href="https://octothorpe.ee">Octothorpe OÜ</a>
     </footer>
 
-    <script>
-        (function () {
-            var params = new URLSearchParams(window.location.search);
-            var ts = params.get("t");
+    <script src="https://cdn.jsdelivr.net/npm/pako@2/dist/pako.min.js"></script>
+    <script type="module">
+        import { timelockDecrypt, HttpCachingChain, HttpChainClient } from './decrypt.bundle.js';
 
-            if (!ts) {
-                document.getElementById("error").hidden = false;
-                return;
+        const BEACON_CONFIGS = {
+            1: {
+                chainHash: '52db9ba70e0cc0f6eaf7803dd07447a1f5477735fd3f661792ba94600c84e971',
+                publicKey: '83cf0f2896adee7eb8b5f01fcad3912212c437e0073e911fb90022d3e760183c8c4b450b6a0a6c3ac6a5776a2d1064510d1fec758c921cc22b0e17e63aaf4bcb5ed66304de9cf809bd274ca73bab4af5a6e9c76a4bc09e76eae8991ef5ece45a',
+                schemeID: 'bls-unchained-g1-rfc9380',
+                genesisTime: 1692803367,
+                period: 3,
+                endpoints: ['https://api.drand.sh', 'https://drand.cloudflare.com', 'https://api2.drand.sh']
             }
+        };
 
-            var unlockMs = parseInt(ts, 10) * 1000;
+        function base64urlDecode(str) {
+            let b64 = str.replace(/-/g, '+').replace(/_/g, '/');
+            while (b64.length % 4 !== 0) b64 += '=';
+            return Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+        }
+
+        function tryDecompress(bytes) {
+            try {
+                return pako.inflate(bytes);
+            } catch {
+                return bytes;
+            }
+        }
+
+        function decodePayload(fragment) {
+            const raw = base64urlDecode(fragment);
+            const wire = tryDecompress(raw);
+            if (wire.length < 2) throw new Error('Payload too short');
+            const version = wire[0];
+            const ciphertext = wire.slice(1);
+            return { version, ciphertext };
+        }
+
+        function showError(title, body) {
+            document.getElementById('message').hidden = true;
+            const errorEl = document.getElementById('error');
+            document.getElementById('errorTitle').textContent = title;
+            document.getElementById('errorBody').textContent = body;
+            errorEl.hidden = false;
+        }
+
+        const params = new URLSearchParams(window.location.search);
+        const ts = params.get('t');
+        const fragment = window.location.hash.slice(1);
+
+        if (!ts || !fragment) {
+            showError(
+                'Invalid message link',
+                'This link doesn\'t contain a valid Supplies message. It may have been truncated or corrupted.'
+            );
+        } else {
+            const unlockMs = parseInt(ts, 10) * 1000;
 
             if (isNaN(unlockMs)) {
-                document.getElementById("error").hidden = false;
-                return;
+                showError('Invalid message link', 'The unlock timestamp is not valid.');
+            } else {
+                let payload;
+                try {
+                    payload = decodePayload(fragment);
+                } catch (e) {
+                    showError('Corrupted message', 'The encrypted data could not be decoded. The link may have been truncated.');
+                }
+
+                if (payload) {
+                    const config = BEACON_CONFIGS[payload.version];
+                    if (!config) {
+                        showError('Unsupported format', 'This message uses an encryption format not yet supported by this reader (version ' + payload.version + ').');
+                    } else {
+                        initMessage(unlockMs, payload, config);
+                    }
+                }
             }
-            var card = document.getElementById("message");
-            var icon = document.getElementById("icon");
-            var status = document.getElementById("status");
-            var countdown = document.getElementById("countdown");
-            var subtitle = document.getElementById("subtitle");
+        }
+
+        function initMessage(unlockMs, payload, config) {
+            const card = document.getElementById('message');
+            const icon = document.getElementById('icon');
+            const status = document.getElementById('status');
+            const countdown = document.getElementById('countdown');
+            const subtitle = document.getElementById('subtitle');
+            const openBtn = document.getElementById('openBtn');
+            const messageText = document.getElementById('messageText');
 
             card.hidden = false;
 
             function formatRemaining(ms) {
-                var s = Math.floor(ms / 1000);
-                var d = Math.floor(s / 86400);
+                let s = Math.floor(ms / 1000);
+                const d = Math.floor(s / 86400);
                 s %= 86400;
-                var h = Math.floor(s / 3600);
+                const h = Math.floor(s / 3600);
                 s %= 3600;
-                var m = Math.floor(s / 60);
+                const m = Math.floor(s / 60);
                 s %= 60;
 
-                var parts = [];
-                if (d > 0) parts.push(d + "d");
-                if (h > 0) parts.push(h + "h");
-                if (m > 0) parts.push(m + "m");
-                if (parts.length < 2) parts.push(s + "s");
-                return parts.slice(0, 2).join(" ");
+                const parts = [];
+                if (d > 0) parts.push(d + 'd');
+                if (h > 0) parts.push(h + 'h');
+                if (m > 0) parts.push(m + 'm');
+                if (parts.length < 2) parts.push(s + 's');
+                return parts.slice(0, 2).join(' ');
             }
 
+            let timerInterval = null;
+            let isDecrypted = false;
+
             function render() {
-                var remaining = unlockMs - Date.now();
+                if (isDecrypted) return;
+
+                const remaining = unlockMs - Date.now();
 
                 if (remaining <= 0) {
-                    icon.textContent = "\uD83D\uDD13";
-                    status.textContent = "Message ready";
-                    countdown.textContent = "";
-                    countdown.className = "countdown ready";
-                    subtitle.textContent = "Open this message in Supplies to read it.";
+                    icon.textContent = '\u{1F513}';
+                    status.textContent = 'Message ready';
+                    countdown.textContent = '';
+                    countdown.className = 'countdown ready';
+                    subtitle.textContent = 'Tap below to reveal this message.';
+                    openBtn.hidden = false;
+                    if (timerInterval) {
+                        clearInterval(timerInterval);
+                        timerInterval = null;
+                    }
                 } else {
-                    icon.textContent = "\uD83D\uDD12";
-                    status.textContent = "Message sealed";
+                    icon.textContent = '\u{1F512}';
+                    status.textContent = 'Message sealed';
                     countdown.textContent = formatRemaining(remaining);
-                    countdown.className = "countdown";
-                    subtitle.textContent = "This message will unlock " + new Date(unlockMs).toLocaleString() + ".";
+                    countdown.className = 'countdown';
+                    subtitle.textContent = 'Unlocks ' + new Date(unlockMs).toLocaleString() + '.';
+                    openBtn.hidden = true;
                 }
             }
 
             render();
-            setInterval(render, 1000);
-        })();
+            timerInterval = setInterval(render, 1000);
+
+            openBtn.addEventListener('click', async function () {
+                openBtn.disabled = true;
+                openBtn.textContent = 'Decrypting\u2026';
+
+                try {
+                    const ciphertextStr = new TextDecoder().decode(payload.ciphertext);
+
+                    const chain = new HttpCachingChain(
+                        'https://api.drand.sh/' + config.chainHash,
+                        { chainHash: config.chainHash }
+                    );
+                    const client = new HttpChainClient(chain, {
+                        chainHash: config.chainHash,
+                    });
+
+                    const plaintext = await timelockDecrypt(ciphertextStr, chain, client);
+
+                    isDecrypted = true;
+
+                    // Reveal animation: lock rotates
+                    icon.classList.add('unlocking');
+                    icon.textContent = '\u{1F513}';
+                    status.textContent = 'Message revealed';
+                    countdown.hidden = true;
+                    subtitle.hidden = true;
+                    openBtn.hidden = true;
+
+                    // Message slides in after lock animation
+                    setTimeout(function () {
+                        messageText.textContent = plaintext;
+                        messageText.classList.add('revealed');
+                    }, 300);
+
+                } catch (e) {
+                    openBtn.disabled = false;
+                    openBtn.textContent = 'Open Message';
+
+                    const remaining = unlockMs - Date.now();
+                    if (remaining > 0) {
+                        subtitle.textContent = 'This message is not ready yet. It unlocks ' + new Date(unlockMs).toLocaleString() + '.';
+                        subtitle.style.color = '#e67e00';
+                        openBtn.hidden = true;
+                        if (!timerInterval) {
+                            timerInterval = setInterval(render, 1000);
+                        }
+                    } else {
+                        subtitle.textContent = 'Decryption failed. The beacon may not have published yet — try again in a few seconds.';
+                        subtitle.style.color = '#ff3b30';
+                    }
+                }
+            });
+        }
     </script>
 </body>
 </html>
