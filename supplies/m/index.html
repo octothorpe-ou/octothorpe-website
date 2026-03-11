@@ -239,7 +239,7 @@
 
         function tryDecompress(bytes) {
             try {
-                return pako.inflate(bytes);
+                return pako.inflateRaw(bytes);
             } catch {
                 return bytes;
             }
