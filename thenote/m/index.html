@@ -76,13 +76,13 @@
             font-size: 1.5rem;
             font-weight: 700;
             font-variant-numeric: tabular-nums;
-            color: #e67e00;
+            color: #c0392b;
             margin-bottom: 0.25rem;
             letter-spacing: 0.02em;
         }
 
         .countdown.ready {
-            color: #34c759;
+            color: #2a6b6b;
         }
 
         .label {
@@ -105,7 +105,7 @@
             align-items: center;
             justify-content: center;
             gap: 0.4rem;
-            background: #34c759;
+            background: #2a6b6b;
             color: #fff;
             border: none;
             cursor: pointer;
@@ -120,7 +120,7 @@
         }
 
         .open-btn:active {
-            background: #2ba84a;
+            background: #1e5252;
         }
 
         .open-btn:disabled {
@@ -422,7 +422,7 @@
                     const remaining = unlockMs - Date.now();
                     if (remaining > 0) {
                         subtitle.textContent = 'This message is not ready yet. It unlocks ' + new Date(unlockMs).toLocaleString() + '.';
-                        subtitle.style.color = '#e67e00';
+                        subtitle.style.color = '#c0392b';
                         openBtn.hidden = true;
                         if (!timerInterval) {
                             timerInterval = setInterval(render, 1000);
