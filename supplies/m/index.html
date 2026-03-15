@@ -239,7 +239,7 @@
 
         function tryDecompress(bytes) {
             try {
-                return pako.inflate(bytes);
+                return pako.inflateRaw(bytes);
             } catch {
                 return bytes;
             }
@@ -361,6 +361,8 @@
 
                 try {
                     const ciphertextStr = new TextDecoder().decode(payload.ciphertext);
+                    console.log('[supplies] ciphertext length:', ciphertextStr.length);
+                    console.log('[supplies] ciphertext preview:', ciphertextStr.slice(0, 80));
 
                     const chain = new HttpCachingChain(
                         'https://api.drand.sh/' + config.chainHash,
@@ -370,7 +372,9 @@
                         chainHash: config.chainHash,
                     });
 
-                    const plaintext = await timelockDecrypt(ciphertextStr, chain, client);
+                    console.log('[supplies] calling timelockDecrypt with client...');
+                    const plaintext = await timelockDecrypt(ciphertextStr, client);
+                    console.log('[supplies] decryption succeeded');
 
                     isDecrypted = true;
 
@@ -389,6 +393,7 @@
                     }, 300);
 
                 } catch (e) {
+                    console.error('[supplies] decryption error:', e);
                     openBtn.disabled = false;
                     openBtn.textContent = 'Open Message';
 
@@ -401,7 +406,7 @@
                             timerInterval = setInterval(render, 1000);
                         }
                     } else {
-                        subtitle.textContent = 'Decryption failed. The beacon may not have published yet — try again in a few seconds.';
+                        subtitle.textContent = 'Decryption failed: ' + (e.message || e) + '. Try again in a few seconds.';
                         subtitle.style.color = '#ff3b30';
                     }
                 }
