@@ -1,21 +1,21 @@
-# Supplies — Privacy Policy
+# Thenote — Privacy Policy
 
 **Last updated:** March 15, 2026
 
-Supplies is a time-locked messaging app developed by Octothorpe OÜ ("we", "us", "our"). We are committed to your privacy.
+Thenote is a time-locked messaging app developed by Octothorpe OÜ ("we", "us", "our"). We are committed to your privacy.
 
 ## Data We Collect
 
-**None.** Supplies does not collect, store, or transmit any personal data.
+**None.** Thenote does not collect, store, or transmit any personal data.
 
 - Messages are encrypted entirely on your device.
 - No accounts, logins, or registrations are required.
 - No analytics, tracking, or telemetry is used.
-- No cookies are set by the Supplies website.
+- No cookies are set by the Thenote website.
 
 ## How Encryption Works
 
-Supplies uses [drand](https://drand.love) timelock encryption (tlock). Drand is a public, open-source randomness beacon operated by a decentralized network of organizations. Messages are encrypted locally on your device against a future drand round. No server — including ours — can read your messages.
+Thenote uses [drand](https://drand.love) timelock encryption (tlock). Drand is a public, open-source randomness beacon operated by a decentralized network of organizations. Messages are encrypted locally on your device against a future drand round. No server — including ours — can read your messages.
 
 ## Network Requests
 
@@ -33,11 +33,11 @@ When you share a sealed message, the encrypted content is embedded directly in t
 
 ## Third-Party Services
 
-Supplies does not integrate any third-party analytics, advertising, or tracking services.
+Thenote does not integrate any third-party analytics, advertising, or tracking services.
 
 ## Children's Privacy
 
-Supplies does not knowingly collect any information from children under 13.
+Thenote does not knowingly collect any information from children under 13.
 
 ## Changes to This Policy
 
