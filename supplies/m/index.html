@@ -11,6 +11,11 @@
     <meta property="og:description" content="Time-locked for your eyes only.">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://octothorpe.ee/supplies/m/og-image.png">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Sealed Message from Supplies">
+    <meta name="twitter:description" content="Time-locked for your eyes only.">
+    <meta name="twitter:image" content="https://octothorpe.ee/supplies/m/og-image.png">
+    <link rel="icon" href="/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -115,6 +120,11 @@
             cursor: not-allowed;
         }
 
+        .open-btn:focus-visible {
+            outline: 3px solid #007aff;
+            outline-offset: 2px;
+        }
+
         .message-text {
             font-size: 1rem;
             line-height: 1.6;
@@ -189,10 +199,10 @@
 <body>
     <div id="message" class="card" hidden>
         <div class="lock-icon" id="icon"></div>
-        <div class="status" id="status"></div>
+        <div class="status" id="status" aria-live="polite"></div>
         <div class="countdown" id="countdown"></div>
         <div class="subtitle" id="subtitle"></div>
-        <button class="open-btn" id="openBtn" hidden>Open Message</button>
+        <button class="open-btn" id="openBtn" hidden aria-label="Open sealed message">Open Message</button>
         <div class="message-text" id="messageText"></div>
     </div>
 
@@ -213,12 +223,13 @@
     </noscript>
 
     <footer>
+        <a href="https://octothorpe.ee/supplies/get/">Get Supplies</a> &middot;
+        <a href="https://octothorpe.ee/supplies/PRIVACY_POLICY.html">Privacy</a> &middot;
         <a href="https://octothorpe.ee">Octothorpe OÜ</a>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/pako@2/dist/pako.min.js"></script>
     <script type="module">
-        import { timelockDecrypt, HttpCachingChain, HttpChainClient } from './decrypt.bundle.js';
+        import { timelockDecrypt, HttpCachingChain, HttpChainClient, inflateRaw } from './decrypt.bundle.js';
 
         const BEACON_CONFIGS = {
             1: {
@@ -239,7 +250,7 @@
 
         function tryDecompress(bytes) {
             try {
-                return pako.inflateRaw(bytes);
+                return inflateRaw(bytes);
             } catch {
                 return bytes;
             }
@@ -361,8 +372,6 @@
 
                 try {
                     const ciphertextStr = new TextDecoder().decode(payload.ciphertext);
-                    console.log('[supplies] ciphertext length:', ciphertextStr.length);
-                    console.log('[supplies] ciphertext preview:', ciphertextStr.slice(0, 80));
 
                     const chain = new HttpCachingChain(
                         'https://api.drand.sh/' + config.chainHash,
@@ -372,9 +381,7 @@
                         chainHash: config.chainHash,
                     });
 
-                    console.log('[supplies] calling timelockDecrypt with client...');
                     const plaintext = await timelockDecrypt(ciphertextStr, client);
-                    console.log('[supplies] decryption succeeded');
 
                     isDecrypted = true;
 
@@ -393,7 +400,6 @@
                     }, 300);
 
                 } catch (e) {
-                    console.error('[supplies] decryption error:', e);
                     openBtn.disabled = false;
                     openBtn.textContent = 'Open Message';
 
@@ -406,7 +412,7 @@
                             timerInterval = setInterval(render, 1000);
                         }
                     } else {
-                        subtitle.textContent = 'Decryption failed: ' + (e.message || e) + '. Try again in a few seconds.';
+                        subtitle.textContent = 'Decryption failed. Please try again in a few seconds.';
                         subtitle.style.color = '#ff3b30';
                     }
                 }
