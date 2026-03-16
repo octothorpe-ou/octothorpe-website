@@ -53,14 +53,15 @@
             box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
         }
 
-        .lock-icon {
-            font-size: 48px;
+        .app-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 14px;
             margin-bottom: 1rem;
-            line-height: 1;
             transition: transform 0.3s ease;
         }
 
-        .lock-icon.unlocking {
+        .app-icon.unlocking {
             animation: lockRotate 0.3s ease forwards;
         }
 
@@ -165,11 +166,6 @@
             box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
         }
 
-        .error-icon {
-            font-size: 48px;
-            margin-bottom: 1rem;
-        }
-
         .error-title {
             font-size: 1.1rem;
             font-weight: 600;
@@ -210,7 +206,7 @@
 </head>
 <body>
     <div id="message" class="card" hidden>
-        <div class="lock-icon" id="icon"></div>
+        <img class="app-icon" id="icon" src="app-icon.png" alt="Thenote" width="60" height="60">
         <div class="label" id="label" hidden></div>
         <div class="status" id="status" aria-live="polite"></div>
         <div class="countdown" id="countdown"></div>
@@ -220,14 +216,14 @@
     </div>
 
     <div id="error" class="error-card" hidden>
-        <div class="error-icon">?</div>
+        <img class="app-icon" src="app-icon.png" alt="Thenote" width="60" height="60">
         <div class="error-title" id="errorTitle">Invalid message link</div>
         <div class="error-body" id="errorBody">This link doesn't contain a valid Thenote message. It may have been truncated or corrupted.</div>
     </div>
 
     <noscript>
         <div class="noscript-card">
-            <div style="font-size: 48px; margin-bottom: 1rem;">&#x1F512;</div>
+            <img src="app-icon.png" alt="Thenote" width="60" height="60" style="border-radius: 14px; margin-bottom: 1rem;">
             <div style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">JavaScript Required</div>
             <div style="font-size: 0.9rem; color: #86868b; line-height: 1.5;">
                 This sealed message requires JavaScript to decrypt. Please enable JavaScript in your browser settings.
@@ -363,7 +359,6 @@
                 const remaining = unlockMs - Date.now();
 
                 if (remaining <= 0) {
-                    icon.textContent = '\u{1F513}';
                     status.textContent = 'Message ready';
                     countdown.textContent = '';
                     countdown.className = 'countdown ready';
@@ -374,7 +369,6 @@
                         timerInterval = null;
                     }
                 } else {
-                    icon.textContent = '\u{1F512}';
                     status.textContent = 'Message sealed';
                     countdown.textContent = formatRemaining(remaining);
                     countdown.className = 'countdown';
@@ -407,7 +401,6 @@
 
                     // Reveal animation: lock rotates
                     icon.classList.add('unlocking');
-                    icon.textContent = '\u{1F513}';
                     status.textContent = 'Message revealed';
                     countdown.hidden = true;
                     subtitle.hidden = true;
