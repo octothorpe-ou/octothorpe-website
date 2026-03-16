@@ -384,7 +384,19 @@
                 openBtn.disabled = true;
                 openBtn.textContent = 'Decrypting\u2026';
 
+                function timeout(promise, ms) {
+                    return Promise.race([
+                        promise,
+                        new Promise(function (_, reject) {
+                            setTimeout(function () { reject(new Error('timeout')); }, ms);
+                        })
+                    ]);
+                }
+
                 try {
+                    subtitle.textContent = 'Connecting to beacon network\u2026';
+                    subtitle.style.color = '#86868b';
+
                     const ciphertextStr = new TextDecoder().decode(payload.ciphertext);
 
                     const chain = new HttpCachingChain(
@@ -395,7 +407,9 @@
                         chainHash: config.chainHash,
                     });
 
-                    const plaintext = await timelockDecrypt(ciphertextStr, client);
+                    subtitle.textContent = 'Decrypting message\u2026';
+
+                    const plaintext = await timeout(timelockDecrypt(ciphertextStr, client), 30000);
 
                     isDecrypted = true;
 
@@ -424,8 +438,11 @@
                         if (!timerInterval) {
                             timerInterval = setInterval(render, 1000);
                         }
+                    } else if (e.message === 'timeout') {
+                        subtitle.textContent = 'Decryption timed out. Please try again.';
+                        subtitle.style.color = '#ff3b30';
                     } else {
-                        subtitle.textContent = 'Decryption failed. Please try again in a few seconds.';
+                        subtitle.textContent = 'Decryption failed: ' + (e.message || 'Unknown error') + '. Please try again.';
                         subtitle.style.color = '#ff3b30';
                     }
                 }
