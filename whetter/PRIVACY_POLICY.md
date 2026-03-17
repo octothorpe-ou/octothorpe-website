@@ -1,21 +1,21 @@
-# Thenote — Privacy Policy
+# Whetter — Privacy Policy
 
 **Last updated:** March 15, 2026
 
-Thenote is a time-locked messaging app developed by Octothorpe OÜ ("we", "us", "our"). We are committed to your privacy.
+Whetter is a time-locked messaging app developed by Octothorpe OÜ ("we", "us", "our"). We are committed to your privacy.
 
 ## Data We Collect
 
-**None.** Thenote does not collect, store, or transmit any personal data.
+**None.** Whetter does not collect, store, or transmit any personal data.
 
 - Messages are encrypted entirely on your device.
 - No accounts, logins, or registrations are required.
 - No analytics, tracking, or telemetry is used.
-- No cookies are set by the Thenote website.
+- No cookies are set by the Whetter website.
 
 ## How Encryption Works
 
-Thenote uses [drand](https://drand.love) timelock encryption (tlock). Drand is a public, open-source randomness beacon operated by a decentralized network of organizations. Messages are encrypted locally on your device against a future drand round. No server — including ours — can read your messages.
+Whetter uses [drand](https://drand.love) timelock encryption (tlock). Drand is a public, open-source randomness beacon operated by a decentralized network of organizations. Messages are encrypted locally on your device against a future drand round. No server — including ours — can read your messages.
 
 ## Network Requests
 
@@ -33,11 +33,11 @@ When you share a sealed message, the encrypted content is embedded directly in t
 
 ## Third-Party Services
 
-Thenote does not integrate any third-party analytics, advertising, or tracking services.
+Whetter does not integrate any third-party analytics, advertising, or tracking services.
 
 ## Children's Privacy
 
-Thenote does not knowingly collect any information from children under 13.
+Whetter does not knowingly collect any information from children under 13.
 
 ## Changes to This Policy
 

@@ -5,20 +5,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Sealed Message — Thenote</title>
-    <meta name="description" content="Time-locked for your eyes only. Powered by Thenote.">
-    <meta property="og:title" content="Sealed Message from Thenote">
+    <title>Sealed Message — Whetter</title>
+    <meta name="description" content="Time-locked for your eyes only. Powered by Whetter.">
+    <meta property="og:title" content="Sealed Message from Whetter">
     <meta property="og:description" content="Time-locked for your eyes only.">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="https://octothorpe.ee/thenote/m/og-image.png">
+    <meta property="og:image" content="https://octothorpe.ee/whetter/m/og-image.png">
     <meta property="og:image:width" content="1260">
     <meta property="og:image:height" content="1260">
     <meta property="og:image:type" content="image/png">
-    <meta property="og:url" content="https://octothorpe.ee/thenote/m/">
+    <meta property="og:url" content="https://octothorpe.ee/whetter/m/">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Sealed Message from Thenote">
+    <meta name="twitter:title" content="Sealed Message from Whetter">
     <meta name="twitter:description" content="Time-locked for your eyes only.">
-    <meta name="twitter:image" content="https://octothorpe.ee/thenote/m/og-image.png">
+    <meta name="twitter:image" content="https://octothorpe.ee/whetter/m/og-image.png">
     <link rel="icon" href="/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -210,7 +210,7 @@
 </head>
 <body>
     <div id="message" class="card" hidden>
-        <img class="app-icon" id="icon" src="app-icon.png" alt="Thenote" width="60" height="60">
+        <img class="app-icon" id="icon" src="app-icon.png" alt="Whetter" width="60" height="60">
         <div class="label" id="label" hidden></div>
         <div class="status" id="status" aria-live="polite"></div>
         <div class="countdown" id="countdown"></div>
@@ -220,14 +220,14 @@
     </div>
 
     <div id="error" class="error-card" hidden>
-        <img class="app-icon" src="app-icon.png" alt="Thenote" width="60" height="60">
+        <img class="app-icon" src="app-icon.png" alt="Whetter" width="60" height="60">
         <div class="error-title" id="errorTitle">Invalid message link</div>
-        <div class="error-body" id="errorBody">This link doesn't contain a valid Thenote message. It may have been truncated or corrupted.</div>
+        <div class="error-body" id="errorBody">This link doesn't contain a valid Whetter message. It may have been truncated or corrupted.</div>
     </div>
 
     <noscript>
         <div class="noscript-card">
-            <img src="app-icon.png" alt="Thenote" width="60" height="60" style="border-radius: 14px; margin-bottom: 1rem;">
+            <img src="app-icon.png" alt="Whetter" width="60" height="60" style="border-radius: 14px; margin-bottom: 1rem;">
             <div style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">JavaScript Required</div>
             <div style="font-size: 0.9rem; color: #86868b; line-height: 1.5;">
                 This sealed message requires JavaScript to decrypt. Please enable JavaScript in your browser settings.
@@ -236,8 +236,8 @@
     </noscript>
 
     <footer>
-        <a href="https://octothorpe.ee/thenote/get/">Get Thenote</a> &middot;
-        <a href="https://octothorpe.ee/thenote/PRIVACY_POLICY.html">Privacy</a> &middot;
+        <a href="https://octothorpe.ee/whetter/get/">Get Whetter</a> &middot;
+        <a href="https://octothorpe.ee/whetter/PRIVACY_POLICY.html">Privacy</a> &middot;
         <a href="https://octothorpe.ee">Octothorpe OÜ</a>
     </footer>
 
@@ -294,7 +294,7 @@
         if (!ts || !fragment) {
             showError(
                 'Invalid message link',
-                'This link doesn\'t contain a valid Thenote message. It may have been truncated or corrupted.'
+                'This link doesn\'t contain a valid Whetter message. It may have been truncated or corrupted.'
             );
         } else {
             const unlockMs = parseInt(ts, 10) * 1000;
