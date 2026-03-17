@@ -261,17 +261,19 @@
             return Uint8Array.from(atob(b64), c => c.charCodeAt(0));
         }
 
-        function tryDecompress(bytes) {
-            try {
-                return inflateRaw(bytes);
-            } catch {
-                return bytes;
-            }
-        }
-
         function decodePayload(fragment) {
             const raw = base64urlDecode(fragment);
-            const wire = tryDecompress(raw);
+            if (raw.length < 2) throw new Error('Payload too short');
+            const flag = raw[0];
+            let wire;
+            if (flag === 0x00) {
+                wire = raw.slice(1);
+            } else if (flag === 0x01) {
+                wire = inflateRaw(raw.slice(1));
+            } else {
+                // Legacy format (no flag byte) — try zlib on entire raw, fall back to raw
+                try { wire = inflateRaw(raw); } catch { wire = raw; }
+            }
             if (wire.length < 2) throw new Error('Payload too short');
             const version = wire[0];
             const ciphertext = wire.slice(1);
