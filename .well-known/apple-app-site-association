@@ -1,0 +1,11 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "HHHYBV54TB.octothorpe.whetter",
+        "paths": ["/whetter/m/*"]
+      }
+    ]
+  }
+}

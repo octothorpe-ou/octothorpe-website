@@ -1,1 +1,3 @@
 title: ""
+include:
+  - .well-known
