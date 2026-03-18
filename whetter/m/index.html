@@ -377,7 +377,7 @@
                     status.textContent = 'Your curiosity has been whetted';
                     countdown.textContent = formatRemaining(remaining);
                     countdown.className = 'countdown';
-                    subtitle.textContent = 'Unlocks ' + new Date(unlockMs).toLocaleString() + '.';
+                    subtitle.textContent = 'Unlocks ' + new Date(unlockMs).toLocaleString(undefined, { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }) + '.';
                     openBtn.hidden = true;
                 }
             }
@@ -437,7 +437,7 @@
 
                     const remaining = unlockMs - Date.now();
                     if (remaining > 0) {
-                        subtitle.textContent = 'This message is not ready yet. It unlocks ' + new Date(unlockMs).toLocaleString() + '.';
+                        subtitle.textContent = 'This message is not ready yet. It unlocks ' + new Date(unlockMs).toLocaleString(undefined, { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }) + '.';
                         subtitle.style.color = '#c0392b';
                         openBtn.hidden = true;
                         if (!timerInterval) {
