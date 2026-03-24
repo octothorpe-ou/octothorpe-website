@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whetter Support</title>
+    <meta name="description" content="Support and frequently asked questions for the Whetter app.">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f2f2f7;
+            color: #1d1d1f;
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 1.5rem;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            max-width: 480px;
+            width: 100%;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .app-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 14px;
+            margin-bottom: 1rem;
+        }
+
+        .page-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .section-title {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #86868b;
+            margin-bottom: 0.75rem;
+        }
+
+        .faq-item {
+            border-top: 1px solid #e5e5ea;
+            padding: 1rem 0;
+        }
+
+        .faq-question {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+            line-height: 1.4;
+        }
+
+        .faq-answer {
+            font-size: 0.85rem;
+            color: #48484a;
+            line-height: 1.55;
+        }
+
+        .contact {
+            border-top: 1px solid #e5e5ea;
+            padding-top: 1.5rem;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .contact-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+        }
+
+        .contact-link {
+            display: inline-block;
+            color: #2a6b6b;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        .contact-link:hover {
+            text-decoration: underline;
+        }
+
+        .footer-links {
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .footer-links a {
+            font-size: 0.8rem;
+            color: #86868b;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="header">
+            <img class="app-icon" src="/whetter/m/app-icon.svg" alt="Whetter" width="60" height="60">
+            <div class="page-title">Whetter Support</div>
+        </div>
+
+        <div class="section-title">Frequently Asked Questions</div>
+
+        <div class="faq-item">
+            <div class="faq-question">How does time-locked encryption work?</div>
+            <div class="faq-answer">Messages are encrypted using the drand distributed randomness beacon. No server controls the lock — the math does. Messages can only be decrypted after the chosen time.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">Do recipients need the app?</div>
+            <div class="faq-answer">No. Messages open in any browser.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">What counts toward my 10 free messages?</div>
+            <div class="faq-answer">Only messages you share count. Saving to your vault is free and unlimited.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">What happens if my subscription lapses?</div>
+            <div class="faq-answer">You keep all existing messages. You can't share new ones if you've used your 10 free messages.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">Can I delete a message I sent?</div>
+            <div class="faq-answer">Once shared, the link cannot be revoked. The encryption is permanent.</div>
+        </div>
+
+        <div class="contact">
+            <div class="contact-title">Still need help?</div>
+            <a class="contact-link" href="mailto:support@octothorpe.ee">support@octothorpe.ee</a>
+        </div>
+
+        <div class="footer-links">
+            <a href="/whetter/PRIVACY_POLICY.md">Privacy Policy</a>
+        </div>
+    </div>
+</body>
+</html>
