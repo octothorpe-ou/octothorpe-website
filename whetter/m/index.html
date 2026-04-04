@@ -190,6 +190,20 @@
             text-align: center;
             box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
         }
+        footer {
+            margin-top: 2rem;
+            font-size: 0.75rem;
+            color: #aeaeb2;
+        }
+
+        footer a {
+            color: #aeaeb2;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -219,6 +233,11 @@
         </div>
     </noscript>
 
+
+    <footer>
+        <a href="https://apps.apple.com/app/whetter/id6761067723">Get Whetter</a> &middot;
+        <a href="https://octothorpe.ee/whetter/PRIVACY_POLICY.html">Privacy</a>
+    </footer>
 
     <script type="module">
         import { timelockDecrypt, HttpCachingChain, HttpChainClient, inflateRaw } from './decrypt.bundle.js';
