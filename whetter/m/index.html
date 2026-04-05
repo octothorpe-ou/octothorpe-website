@@ -159,6 +159,65 @@
             transform: translateY(0);
         }
 
+        .post-reveal {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.5s ease 0.3s, transform 0.5s ease 0.3s;
+        }
+
+        .post-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .context-line {
+            font-size: 0.8rem;
+            color: #86868b;
+            line-height: 1.5;
+            margin-top: 1.25rem;
+            padding-top: 1.25rem;
+            border-top: 1px solid #e5e5ea;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #2a6b6b;
+            color: #fff;
+            text-decoration: none;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 0.85rem 1.75rem;
+            border-radius: 14px;
+            width: 100%;
+            margin-top: 1.25rem;
+            transition: background 0.15s;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .cta-btn:active {
+            background: #1e5252;
+        }
+
+        .occasions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .occasion-chip {
+            font-size: 0.75rem;
+            color: #636366;
+            background: #f2f2f7;
+            padding: 0.35rem 0.75rem;
+            border-radius: 100px;
+            white-space: nowrap;
+        }
+
         .error-card {
             background: #fff;
             border-radius: 20px;
@@ -215,6 +274,17 @@
         <div class="subtitle" id="subtitle"></div>
         <button class="open-btn" id="openBtn" hidden aria-label="Open sealed message">Open Message</button>
         <div class="message-text" id="messageText"></div>
+        <div id="postReveal" class="post-reveal" hidden>
+            <div class="context-line" id="contextLine"></div>
+            <a class="cta-btn" href="https://apps.apple.com/app/whetter/id6761067723">Send your own sealed message</a>
+            <div class="occasions">
+                <span class="occasion-chip">Birthday</span>
+                <span class="occasion-chip">Anniversary</span>
+                <span class="occasion-chip">Graduation</span>
+                <span class="occasion-chip">New Year</span>
+                <span class="occasion-chip">Just because</span>
+            </div>
+        </div>
     </div>
 
     <div id="error" class="error-card" hidden>
@@ -433,9 +503,18 @@
                     openBtn.hidden = true;
 
                     // Message slides in after lock animation
+                    const postReveal = document.getElementById('postReveal');
+                    const contextLine = document.getElementById('contextLine');
+                    contextLine.textContent = 'This message was sealed with cryptography until ' + new Date(unlockMs).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) + '. Not even Whetter could read it early.';
                     setTimeout(function () {
                         messageText.textContent = plaintext;
                         messageText.classList.add('revealed');
+                        setTimeout(function () {
+                            postReveal.hidden = false;
+                            // Force reflow before adding class for transition
+                            postReveal.offsetHeight;
+                            postReveal.classList.add('visible');
+                        }, 400);
                     }, 300);
 
                 } catch (e) {
