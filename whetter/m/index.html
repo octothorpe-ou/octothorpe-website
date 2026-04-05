@@ -84,13 +84,9 @@
             font-size: 1.5rem;
             font-weight: 700;
             font-variant-numeric: tabular-nums;
-            color: #c0392b;
+            color: #2a6b6b;
             margin-bottom: 0.25rem;
             letter-spacing: 0.02em;
-        }
-
-        .countdown.ready {
-            color: #2a6b6b;
         }
 
         .label {
@@ -139,6 +135,13 @@
         .open-btn:focus-visible {
             outline: 3px solid #007aff;
             outline-offset: 2px;
+        }
+
+        .crypto-line {
+            font-size: 0.8rem;
+            color: #86868b;
+            line-height: 1.4;
+            margin-bottom: 0.25rem;
         }
 
         .message-text {
@@ -280,6 +283,7 @@
         <div class="status" id="status" aria-live="polite"></div>
         <div class="countdown" id="countdown"></div>
         <div class="subtitle" id="subtitle"></div>
+        <div class="crypto-line" id="cryptoLine" hidden>Sealed with cryptography. Not even Whetter can read it early.</div>
         <button class="open-btn" id="openBtn" hidden aria-label="Open sealed message">Open Message</button>
         <div class="message-text" id="messageText"></div>
         <div id="postReveal" class="post-reveal" hidden>
@@ -413,6 +417,7 @@
             const countdown = document.getElementById('countdown');
             const subtitle = document.getElementById('subtitle');
             const openBtn = document.getElementById('openBtn');
+            const cryptoLine = document.getElementById('cryptoLine');
             const messageText = document.getElementById('messageText');
 
             card.hidden = false;
@@ -448,20 +453,21 @@
                 const remaining = unlockMs - Date.now();
 
                 if (remaining <= 0) {
-                    status.textContent = 'Message ready';
+                    status.hidden = true;
                     countdown.textContent = '';
-                    countdown.className = 'countdown ready';
-                    subtitle.textContent = 'Tap below to reveal this message.';
+                    cryptoLine.hidden = true;
+                    subtitle.textContent = 'Sealed until ' + new Date(unlockMs).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) + '. Ready now.';
                     openBtn.hidden = false;
                     if (timerInterval) {
                         clearInterval(timerInterval);
                         timerInterval = null;
                     }
                 } else {
+                    status.hidden = false;
                     status.textContent = 'The wait begins';
                     countdown.textContent = formatRemaining(remaining);
-                    countdown.className = 'countdown';
                     subtitle.textContent = 'Unlocks ' + new Date(unlockMs).toLocaleString() + '.';
+                    cryptoLine.hidden = false;
                     openBtn.hidden = true;
                 }
             }
@@ -506,6 +512,7 @@
                     icon.classList.add('unlocking');
                     status.hidden = true;
                     countdown.hidden = true;
+                    cryptoLine.hidden = true;
                     subtitle.hidden = true;
                     openBtn.hidden = true;
 
