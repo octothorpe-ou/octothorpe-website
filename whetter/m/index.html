@@ -142,8 +142,9 @@
         }
 
         .message-text {
-            font-size: 1rem;
+            font-size: 1.25rem;
             line-height: 1.6;
+            font-weight: 500;
             color: #1d1d1f;
             text-align: center;
             white-space: pre-wrap;
@@ -172,11 +173,18 @@
 
         .context-line {
             font-size: 0.8rem;
-            color: #86868b;
+            color: #636366;
             line-height: 1.5;
             margin-top: 1.25rem;
             padding-top: 1.25rem;
             border-top: 1px solid #e5e5ea;
+        }
+
+        .label-revealed {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #86868b;
+            margin-bottom: 0.5rem;
         }
 
         .cta-btn {
@@ -305,7 +313,6 @@
 
 
     <footer>
-        <a href="https://apps.apple.com/app/whetter/id6761067723">Get Whetter</a> &middot;
         <a href="https://octothorpe.ee/whetter/PRIVACY_POLICY.html">Privacy</a>
     </footer>
 
@@ -497,10 +504,15 @@
 
                     // Reveal animation: lock rotates
                     icon.classList.add('unlocking');
-                    status.textContent = 'Message revealed';
+                    status.hidden = true;
                     countdown.hidden = true;
                     subtitle.hidden = true;
                     openBtn.hidden = true;
+
+                    // Demote label to small text
+                    if (label) {
+                        labelEl.className = 'label-revealed';
+                    }
 
                     // Message slides in after lock animation
                     const postReveal = document.getElementById('postReveal');
