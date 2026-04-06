@@ -3,38 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Octothorpe OÜ</title>
+    <title>Octothorpe — An independent app studio in Tallinn</title>
+    <meta name="description" content="Octothorpe is an independent app studio in Tallinn, Estonia. Makers of Whetter and other iOS apps.">
+    <link rel="icon" href="/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;1,600&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: #fafafa;
-            color: #333;
+            color: #1d1d1f;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            padding: 2rem;
+            padding: 4rem 1.5rem 2rem;
+            -webkit-text-size-adjust: 100%;
         }
-        .container {
+
+        .page {
             max-width: 600px;
-            text-align: center;
+            width: 100%;
         }
+
+        /* ── Header ── */
+        header {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+
         .logo {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 0.4rem;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.6rem;
         }
+
         .logo-hash {
             font-family: 'JetBrains Mono', monospace;
             font-size: 3.5rem;
@@ -42,6 +50,7 @@
             color: transparent;
             -webkit-text-stroke: 2px #0071e3;
         }
+
         .logo-text {
             font-family: 'Inter', sans-serif;
             font-size: 2rem;
@@ -49,56 +58,139 @@
             font-style: italic;
             color: #1d1d1f;
         }
-        .legal-name {
-            font-size: 0.9rem;
-            color: #999;
-            margin-bottom: 0.5rem;
-        }
+
         .tagline {
-            font-size: 1.2rem;
-            color: #666;
-            margin-bottom: 2rem;
+            font-size: 1.05rem;
+            color: #86868b;
         }
-        .description {
-            font-size: 1rem;
-            line-height: 1.6;
-            color: #555;
-            margin-bottom: 2rem;
+
+        /* ── Apps section ── */
+        .apps-heading {
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #86868b;
+            margin-bottom: 1rem;
         }
-        .contact {
-            font-size: 0.95rem;
-            color: #666;
+
+        .app-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 1px 12px rgba(0, 0, 0, 0.06);
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
         }
-        .contact a {
+
+        .app-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 18px;
+            flex-shrink: 0;
+        }
+
+        .app-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .app-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .app-desc {
+            font-size: 0.9rem;
+            color: #636366;
+            line-height: 1.4;
+            margin-bottom: 0.75rem;
+        }
+
+        .app-store-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.85rem;
+            font-weight: 500;
             color: #0071e3;
             text-decoration: none;
         }
-        .contact a:hover {
+
+        .app-store-link:hover {
             text-decoration: underline;
         }
+
+        .app-store-link svg {
+            width: 16px;
+            height: 16px;
+            fill: #0071e3;
+        }
+
+        /* ── Footer ── */
         footer {
-            margin-top: 3rem;
-            font-size: 0.85rem;
-            color: #999;
+            margin-top: auto;
+            padding-top: 4rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #aeaeb2;
+            line-height: 1.8;
+        }
+
+        footer a {
+            color: #aeaeb2;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 480px) {
+            body { padding: 2.5rem 1.25rem 1.5rem; }
+            .logo-hash { font-size: 2.8rem; }
+            .logo-text { font-size: 1.6rem; }
+            .app-card { padding: 1.5rem; gap: 1.25rem; }
+            .app-icon { width: 64px; height: 64px; border-radius: 14px; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="logo">
-            <span class="logo-hash">#</span>
-            <span class="logo-text">Octothorpe</span>
-        </div>
-    
-        <p class="tagline">
-            Software development company
-        </p>
-        <p class="contact">
-            Contact: <a href="mailto:info@octothorpe.ee">info@octothorpe.ee</a>
-        </p>
+    <div class="page">
+        <header>
+            <div class="logo">
+                <span class="logo-hash">#</span>
+                <span class="logo-text">Octothorpe</span>
+            </div>
+            <p class="tagline">An independent app studio in Tallinn</p>
+        </header>
+
+        <section>
+            <h2 class="apps-heading">Our Apps</h2>
+
+            <a class="app-card" href="https://apps.apple.com/app/whetter/id6761067723" style="text-decoration:none;color:inherit;">
+                <svg class="app-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="48" height="48" rx="10.5" fill="#005F5F"/>
+                    <path d="M13.9091 35.6363L7.0455 12.3636H14.0909L17.2727 26.6818H17.4545L21.2273 12.3636H26.7727L30.5455 26.7272H30.7273L33.9091 12.3636H40.9545L34.0909 35.6363H28.0455L24.0909 22.6363H23.9091L19.9545 35.6363H13.9091Z" fill="#F5C518"/>
+                </svg>
+                <div class="app-info">
+                    <div class="app-name">Whetter</div>
+                    <div class="app-desc">Time-locked messages, sealed with cryptography</div>
+                    <span class="app-store-link">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                        App Store
+                    </span>
+                </div>
+            </a>
+        </section>
     </div>
+
     <footer>
-        © 2026 Octothorpe OÜ · Tallinn, Estonia
+        <a href="mailto:info@octothorpe.ee">info@octothorpe.ee</a><br>
+        <a href="/whetter/PRIVACY_POLICY.html">Privacy</a><br>
+        &copy; 2026 Octothorpe O&Uuml; &middot; Tallinn, Estonia
     </footer>
 </body>
 </html>
